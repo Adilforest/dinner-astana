@@ -1,0 +1,10 @@
+{
+  // Статичный сайт на Cloudflare Workers: только файлы из папки public,
+  // серверного кода нет. Деплой: npx wrangler deploy
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "dinner-astana",
+  "compatibility_date": "2025-09-10",
+  "assets": {
+    "directory": "./public"
+  }
+}

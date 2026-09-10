@@ -6,39 +6,36 @@
 ## Файлы
 
 ```
-index.html          разметка и все сеты
-styles.css          оформление
-app.js              переключение сетов + подгрузка Instagram
-images/             фото сетов
+public/index.html    разметка и все сеты
+public/styles.css    оформление
+public/app.js        переключение сетов + подгрузка Instagram
+public/images/       фото сетов
+wrangler.jsonc       конфиг деплоя на Cloudflare Workers
 ```
 
 ## Локальный просмотр
 
-Просто открой `index.html` в браузере. Встраивание Instagram работает только по http/https,
-поэтому для проверки постов удобнее поднять локальный сервер:
+Встраивание Instagram работает только по http или https, поэтому лучше поднять сервер:
 
 ```
+cd public
 python -m http.server 8000
 ```
 
-## GitHub Pages
+## Деплой на Cloudflare Workers
+
+В панели Cloudflare: Workers & Pages → Create → Import a repository → `dinner-astana`.
+
+- Build command: `npx wrangler deploy`
+- Deploy command: оставить пустым, деплой уже входит в команду сборки
+
+Из терминала то же самое делается так:
 
 ```
-git init
-git add .
-git commit -m "site"
-git branch -M main
-git remote add origin https://github.com/<username>/<repo>.git
-git push -u origin main
+npx wrangler deploy
 ```
 
-Дальше Settings → Pages → Source: `Deploy from a branch`, ветка `main`, папка `/ (root)`.
+## Деплой на GitHub Pages
 
-## Cloudflare Pages
-
-Dashboard → Workers & Pages → Create → Pages → Connect to Git → выбери репозиторий.
-Сборка не нужна:
-
-- Framework preset: `None`
-- Build command: оставить пустым
-- Build output directory: `/`
+Settings → Pages → Deploy from a branch → `main`. Учти, что Pages отдаёт корень
+репозитория, а сайт лежит в `public`, поэтому этот вариант потребует переноса файлов в корень.
